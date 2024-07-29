@@ -1,0 +1,33 @@
+#@ load("@ytt:data", "data")
+---
+type:
+  kind: Cluster
+  package: vmware.tanzu.manage.v1alpha1.cluster
+  version: v1alpha1
+fullName:
+  name: #@ data.values.owner+"-eks"
+  orgId: 436d149c-b60f-4979-a58b-f2c38dc5b1b4
+  credentialName: "916681805290"
+  region: us-east-1
+meta:
+  labels:
+    target/owner: #@ data.values.owner
+spec:
+  clusterGroupName: #@ data.values.owner+"-cg"
+  config:
+    logging:
+      apiServer: true
+      authenticator: true
+    roleArn: arn:aws:iam::916681805290:role/control-plane.4343880000855546215.eks.tmc.cloud.vmware.com
+    version: "1.29"
+    vpc:
+      enablePublicAccess: true
+      publicAccessCidrs:
+      - 0.0.0.0/0
+      subnetIds:
+      - subnet-092f1abd89fd8d6ca
+      - subnet-06254dcd8f1f6a77f
+      - subnet-09b0ee9d918860ebc
+      - subnet-08ecbedf4c022da32
+      - subnet-09e06898a460f68c2
+      - subnet-06493ba4a9abd8606

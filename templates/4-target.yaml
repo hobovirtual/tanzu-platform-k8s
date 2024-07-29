@@ -1,0 +1,19 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: spaces.tanzu.vmware.com/v1alpha1
+kind: AvailabilityTarget
+metadata:
+  name: #@ data.values.owner+"-target"
+  namespace: default
+spec:
+  affinity:
+    clusterAffinity:
+      clusterSelectorTerms:
+      - matchExpressions:
+        - key: "target/owner"
+          operator: "In"
+          values:
+          - #@ data.values.owner
+    clusterAntiAffinity:
+      clusterSelectorTerms: []
+  description: "workshop availability target"

@@ -1,0 +1,23 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: spaces.tanzu.vmware.com/v1alpha1
+kind: Space
+metadata:
+  name: #@ data.values.owner+"-workshop-space"
+spec:
+  template:
+    spec:
+      profiles:
+      - name: spring-dev.tanzu.vmware.com
+      - name: #@ data.values.owner+".tanzu-studio.com"
+      resources:
+        limits:
+          cpu: 5000m
+          memory: 10Gi
+  availabilityTargets:
+  - name: #@ data.values.owner+"-target"
+    replicas: 1
+  - name: workshop-overflow
+    replicas: 1
+  updateStrategy:
+    type: RollingUpdate

@@ -1,0 +1,31 @@
+#@ load("@ytt:data", "data")
+---
+type:
+  kind: Nodepool
+  package: vmware.tanzu.manage.v1alpha1.cluster.nodepool
+  version: v1alpha1
+fullName:
+  name: default-nodepool
+  eksClusterName: #@ data.values.owner+"-eks"
+  credentialName: "916681805290"
+  region: us-east-1
+meta:
+  labels:
+    target/owner: #@ data.values.owner
+spec:
+  amiType: AL2_x86_64
+  capacityType: ON_DEMAND
+  instanceTypes:
+  - t3.xlarge
+  roleArn: arn:aws:iam::916681805290:role/worker.4343880000855546215.eks.tmc.cloud.vmware.com
+  rootDiskSize: 20
+  scalingConfig:
+    desiredSize: 3
+    maxSize: 5
+    minSize: 3
+  subnetIds:
+  - subnet-092f1abd89fd8d6ca
+  - subnet-06254dcd8f1f6a77f
+  - subnet-09b0ee9d918860ebc
+  updateConfig:
+    maxUnavailableNodes: 1

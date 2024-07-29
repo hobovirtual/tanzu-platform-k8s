@@ -1,0 +1,36 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: spaces.tanzu.vmware.com/v1alpha1
+kind: Profile
+metadata:
+  name: #@ data.values.owner+".tanzu-studio.com"
+spec:
+  description: "custom networking setup"
+  traits:
+  - name: egress.tanzu.vmware.com
+    alias: egress
+  - name: multicloud-cert-manager.tanzu.vmware.com
+    alias: multicloud-cert-manager
+  - name: multicloud-ingress.tanzu.vmware.com
+    alias: multicloud-ingress.tanzu.vmware.com
+    values:
+      inline:
+        multicloud-ingress.tanzu.vmware.com:
+          name: default-gateway
+          domain:  #@ data.values.owner+".tanzu-studio.com"
+          gslb:
+            authentication:
+              credentialRef: db9f6dee11379a37010992e7975488c6
+            dns:
+              zoneId: Z003126314H3HQ1WTV76R
+          listenerTemplates:
+          - namePrefix: https-
+            port: 443
+            protocol: HTTPS
+            tls:
+              secretRef: prod-certs
+          - namePrefix: http-
+            port: 80
+            protocol: HTTP
+            tls:
+              secretRef: ""

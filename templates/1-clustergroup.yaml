@@ -1,0 +1,16 @@
+#@ load("@ytt:data", "data")
+---
+type:
+   kind: ClusterGroup
+   package: vmware.tanzu.manage.v1alpha1.clustergroup
+   version: v1alpha1
+fullName:
+   name: #@ data.values.owner+"-cg"
+meta:
+   description: "TAE-enabled cluster group"
+   labels:
+    owner: #@ data.values.owner
+    workshop: 'true'
+spec:
+   integrations:
+      - TANZU_APPLICATION_ENGINE
