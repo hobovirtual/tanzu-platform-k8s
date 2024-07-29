@@ -46,3 +46,6 @@ tanzu profile create -f platform-engineer/5-profile.yaml -y
 #6: create space
 #tanzu deploy --only platform-engineer/6-space.yaml -y
 tanzu space create crenaud-workshop-space -p spring-dev.tanzu.vmware.com -p crenaud.tanzu-studio.com -t crenaud-target --update-strategy RollingUpdate -y
+
+# set space context via tanzu cli - select [yourhandle]-workshop-space
+tanzu space use

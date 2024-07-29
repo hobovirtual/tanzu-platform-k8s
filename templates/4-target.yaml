@@ -10,7 +10,7 @@ spec:
     clusterAffinity:
       clusterSelectorTerms:
       - matchExpressions:
-        - key: "target/owner"
+        - key: "owner"
           operator: "In"
           values:
           - #@ data.values.owner

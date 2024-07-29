@@ -10,8 +10,9 @@ fullName:
   credentialName: "916681805290"
   region: us-east-1
 meta:
-  labels:
-    target/owner: #@ data.values.owner
+  labels:    
+    owner: #@ data.values.owner
+    workshop: 'true'
 spec:
   clusterGroupName: #@ data.values.owner+"-cg"
   config:

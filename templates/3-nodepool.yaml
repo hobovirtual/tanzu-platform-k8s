@@ -11,7 +11,8 @@ fullName:
   region: us-east-1
 meta:
   labels:
-    target/owner: #@ data.values.owner
+    owner: #@ data.values.owner
+    workshop: 'true'
 spec:
   amiType: AL2_x86_64
   capacityType: ON_DEMAND
